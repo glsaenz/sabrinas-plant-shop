@@ -1,0 +1,47 @@
+[
+  
+  { "id": 1, "name": "Monstera Deliciosa", "latin": "Monstera deliciosa", "emoji": "🌿", "bg": "bg-sage", "price": 34.99, "care": "easy", "category": "indoor", "tags": ["indoor", "air", "statement"], "stock": true },
+  { "id": 2, "name": "Pothos 'Golden'", "latin": "Epipremnum aureum", "emoji": "🍃", "bg": "bg-moss", "price": 14.99, "care": "easy", "category": "indoor", "tags": ["indoor", "trailing", "air"], "stock": true },
+  { "id": 3, "name": "Snake Plant", "latin": "Sansevieria trifasciata", "emoji": "🌵", "bg": "bg-fern", "price": 27.99, "care": "easy", "category": "indoor", "tags": ["indoor", "air", "statement"], "stock": true },
+  { "id": 4, "name": "Peace Lily", "latin": "Spathiphyllum wallisii", "emoji": "🤍", "bg": "bg-sage", "price": 19.99, "care": "easy", "category": "indoor", "tags": ["indoor", "air"], "stock": true },
+  { "id": 5, "name": "Fiddle Leaf Fig", "latin": "Ficus lyrata", "emoji": "🌳", "bg": "bg-cream", "price": 59.99, "care": "hard", "category": "indoor", "tags": ["indoor", "statement"], "stock": true },
+  { "id": 6, "name": "ZZ Plant", "latin": "Zamioculcas zamiifolia", "emoji": "🪴", "bg": "bg-moss", "price": 24.99, "care": "easy", "category": "indoor", "tags": ["indoor", "air"], "stock": true },
+  { "id": 7, "name": "Bird of Paradise", "latin": "Strelitzia reginae", "emoji": "🌺", "bg": "bg-cream", "price": 79.99, "care": "medium", "category": "indoor", "tags": ["indoor", "statement"], "stock": true },
+  { "id": 8, "name": "Rubber Plant", "latin": "Ficus elastica", "emoji": "🍂", "bg": "bg-fern", "price": 32.99, "care": "medium", "category": "indoor", "tags": ["indoor", "air", "statement"], "stock": true },
+  { "id": 9, "name": "String of Pearls", "latin": "Senecio rowleyanus", "emoji": "🌾", "bg": "bg-fern", "price": 22.99, "care": "medium", "category": "indoor", "tags": ["indoor", "trailing"], "stock": false },
+  { "id": 10, "name": "Aloe Vera", "latin": "Aloe barbadensis", "emoji": "🌵", "bg": "bg-sage", "price": 16.99, "care": "easy", "category": "indoor", "tags": ["indoor", "medicinal"], "stock": true },
+
+  { "id": 11, "name": "Red Rose", "latin": "Rosa rubiginosa", "emoji": "🌹", "bg": "bg-cream", "price": 18.99, "care": "medium", "category": "flower", "tags": ["flower", "fragrant"], "stock": true },
+  { "id": 12, "name": "Lavender", "latin": "Lavandula angustifolia", "emoji": "💜", "bg": "bg-fern", "price": 14.99, "care": "easy", "category": "flower", "tags": ["flower", "fragrant", "medicinal"], "stock": true },
+  { "id": 13, "name": "Sunflower", "latin": "Helianthus annuus", "emoji": "🌻", "bg": "bg-cream", "price": 12.99, "care": "easy", "category": "flower", "tags": ["flower", "statement"], "stock": true },
+  { "id": 14, "name": "Tulip", "latin": "Tulipa gesneriana", "emoji": "🌷", "bg": "bg-sage", "price": 11.99, "care": "medium", "category": "flower", "tags": ["flower", "seasonal"], "stock": true },
+  { "id": 15, "name": "Orchid", "latin": "Phalaenopsis amabilis", "emoji": "🌸", "bg": "bg-moss", "price": 39.99, "care": "hard", "category": "flower", "tags": ["flower", "statement", "fragrant"], "stock": true },
+  { "id": 16, "name": "Daisy", "latin": "Bellis perennis", "emoji": "🌼", "bg": "bg-fern", "price": 9.99, "care": "easy", "category": "flower", "tags": ["flower", "seasonal"], "stock": true },
+  { "id": 17, "name": "Hydrangea", "latin": "Hydrangea macrophylla", "emoji": "💐", "bg": "bg-sage", "price": 29.99, "care": "medium", "category": "flower", "tags": ["flower", "statement"], "stock": true },
+  { "id": 18, "name": "Peony", "latin": "Paeonia lactiflora", "emoji": "🌸", "bg": "bg-cream", "price": 34.99, "care": "medium", "category": "flower", "tags": ["flower", "fragrant"], "stock": false },
+  { "id": 19, "name": "Marigold", "latin": "Tagetes erecta", "emoji": "🌼", "bg": "bg-moss", "price": 8.99, "care": "easy", "category": "flower", "tags": ["flower", "seasonal"], "stock": true },
+  { "id": 20, "name": "Hibiscus", "latin": "Hibiscus rosa-sinensis", "emoji": "🌺", "bg": "bg-fern", "price": 22.99, "care": "medium", "category": "flower", "tags": ["flower", "statement"], "stock": true },
+
+  { "id": 21, "name": "Japanese Maple", "latin": "Acer palmatum", "emoji": "🍁", "bg": "bg-cream", "price": 89.99, "care": "medium", "category": "tree", "tags": ["tree", "statement", "seasonal"], "stock": true },
+  { "id": 22, "name": "Olive Tree", "latin": "Olea europaea", "emoji": "🫒", "bg": "bg-sage", "price": 119.99, "care": "easy", "category": "tree", "tags": ["tree", "statement"], "stock": true },
+  { "id": 23, "name": "Weeping Willow", "latin": "Salix babylonica", "emoji": "🌳", "bg": "bg-moss", "price": 74.99, "care": "easy", "category": "tree", "tags": ["tree", "statement"], "stock": true },
+  { "id": 24, "name": "Cherry Blossom", "latin": "Prunus serrulata", "emoji": "🌸", "bg": "bg-fern", "price": 99.99, "care": "medium", "category": "tree", "tags": ["tree", "flower", "seasonal"], "stock": true },
+  { "id": 25, "name": "Lemon Tree", "latin": "Citrus limon", "emoji": "🍋", "bg": "bg-cream", "price": 64.99, "care": "medium", "category": "tree", "tags": ["tree", "fruit", "fragrant"], "stock": true },
+  { "id": 26, "name": "Magnolia", "latin": "Magnolia grandiflora", "emoji": "🌳", "bg": "bg-sage", "price": 84.99, "care": "medium", "category": "tree", "tags": ["tree", "flower", "fragrant"], "stock": false },
+  { "id": 27, "name": "Dwarf Bamboo", "latin": "Bambusa multiplex", "emoji": "🎋", "bg": "bg-moss", "price": 44.99, "care": "easy", "category": "tree", "tags": ["tree", "statement"], "stock": true },
+  { "id": 28, "name": "Fiddle Fig Tree", "latin": "Ficus pandurata", "emoji": "🌿", "bg": "bg-fern", "price": 109.99, "care": "hard", "category": "tree", "tags": ["tree", "indoor", "statement"], "stock": true },
+  { "id": 29, "name": "Bay Laurel", "latin": "Laurus nobilis", "emoji": "🌿", "bg": "bg-cream", "price": 54.99, "care": "easy", "category": "tree", "tags": ["tree", "fragrant", "medicinal"], "stock": true },
+  { "id": 30, "name": "Bonsai Juniper", "latin": "Juniperus procumbens", "emoji": "🎍", "bg": "bg-sage", "price": 69.99, "care": "hard", "category": "tree", "tags": ["tree", "statement"], "stock": true },
+
+  { "id": 31, "name": "Tomato Plant", "latin": "Solanum lycopersicum", "emoji": "🍅", "bg": "bg-moss", "price": 10.99, "care": "medium", "category": "garden", "tags": ["garden", "fruit", "edible"], "stock": true },
+  { "id": 32, "name": "Basil", "latin": "Ocimum basilicum", "emoji": "🌿", "bg": "bg-fern", "price": 6.99, "care": "easy", "category": "garden", "tags": ["garden", "edible", "fragrant"], "stock": true },
+  { "id": 33, "name": "Mint", "latin": "Mentha spicata", "emoji": "🍃", "bg": "bg-sage", "price": 6.99, "care": "easy", "category": "garden", "tags": ["garden", "edible", "fragrant", "medicinal"], "stock": true },
+  { "id": 34, "name": "Strawberry Plant", "latin": "Fragaria ananassa", "emoji": "🍓", "bg": "bg-cream", "price": 13.99, "care": "medium", "category": "garden", "tags": ["garden", "fruit", "edible"], "stock": true },
+  { "id": 35, "name": "Chilli Pepper", "latin": "Capsicum annuum", "emoji": "🌶️", "bg": "bg-moss", "price": 9.99, "care": "medium", "category": "garden", "tags": ["garden", "edible"], "stock": true },
+  { "id": 36, "name": "Rosemary", "latin": "Salvia rosmarinus", "emoji": "🌿", "bg": "bg-fern", "price": 7.99, "care": "easy", "category": "garden", "tags": ["garden", "edible", "fragrant", "medicinal"], "stock": true },
+  { "id": 37, "name": "Cucumber Plant", "latin": "Cucumis sativus", "emoji": "🥒", "bg": "bg-sage", "price": 8.99, "care": "medium", "category": "garden", "tags": ["garden", "edible"], "stock": false },
+  { "id": 38, "name": "Sunflower Seedling", "latin": "Helianthus annuus", "emoji": "🌱", "bg": "bg-cream", "price": 5.99, "care": "easy", "category": "garden", "tags": ["garden", "flower", "seasonal"], "stock": true },
+  { "id": 39, "name": "Blueberry Bush", "latin": "Vaccinium corymbosum", "emoji": "🫐", "bg": "bg-moss", "price": 24.99, "care": "medium", "category": "garden", "tags": ["garden", "fruit", "edible"], "stock": true },
+  { "id": 40, "name": "Thyme", "latin": "Thymus vulgaris", "emoji": "🌿", "bg": "bg-fern", "price": 6.99, "care": "easy", "category": "garden", "tags": ["garden", "edible", "fragrant", "medicinal"], "stock": true }
+
+]
