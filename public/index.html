@@ -193,7 +193,7 @@
     <div class="subtotal"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
     <div class="subtotal"><span>Shipping</span><span id="shipping">—</span></div>
     <div class="total-row"><span>Total</span><span id="total">$0.00</span></div>
-    <button class="checkout-btn">Proceed to checkout →</button>
+    <button class="checkout-btn" onclick="handleCheckout()">Proceed to checkout →</button>
   </div>
 </div>
 
@@ -315,16 +315,57 @@
     function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
 
     async function init() {
-        try {
+      try {
         const res = await fetch('/api/products');
         products = await res.json();
         renderGrid(products);
-        } catch (err) {
-        console.error('Failed to load products:', err);
+
+        // Restore cart if returning from a cancelled payment
+        const savedCart = localStorage.getItem('savedCart');
+        if (savedCart) {
+          cart = JSON.parse(savedCart);
+          updateCartUI();
+          localStorage.removeItem('savedCart'); // clear it after restoring
         }
+
+      } catch (err) {
+        console.error('Failed to load products:', err);
+      }
     }
 
     init();
+
+  // To handle the stripe checkout function 
+  async function handleCheckout() {
+    const cartItems = Object.values(cart);
+
+    if (cartItems.length === 0) {
+      showToast('Your cart is empty!');
+      return;
+    }
+
+    // Save cart to localStorage before leaving the page
+    localStorage.setItem('savedCart', JSON.stringify(cart));
+
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartItems })
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        showToast('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      showToast('Checkout failed. Please try again.');
+    }
+  }
 </script>
 </body>
 </html>
