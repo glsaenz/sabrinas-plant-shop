@@ -1,14 +1,75 @@
 <!DOCTYPE html>
-<html>
-<head><title>Order Confirmed</title></head>
-<body style="font-family: sans-serif; text-align: center; padding: 4rem;">
-  <h1>🌿 Thank you for your order!</h1>
-  <p>Your plants are on their way. We'll send you a confirmation email shortly.</p>
-  <a href="/">Continue shopping</a>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — Sabrina's Plant Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #f4f0e8; color: #2c2c2a; min-height: 100vh; display: flex; flex-direction: column; }
+  nav { background: #2a3d2e; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 22px; color: #d4e8c4; letter-spacing: 0.5px; text-decoration: none; }
+  .logo span { font-style: italic; color: #8fbd78; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #b0c8a0; font-size: 14px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .nav-links a:hover { color: #d4e8c4; }
+  .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem; }
+  .card { background: white; border-radius: 20px; border: 1px solid #e8e4da; padding: 3rem 3.5rem; max-width: 520px; width: 100%; text-align: center; }
+  .icon-circle { width: 80px; height: 80px; background: #dce8d4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 36px; }
+  .card h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: #2a3d2e; margin-bottom: 0.75rem; }
+  .card p { color: #5a7060; font-size: 15px; line-height: 1.7; font-weight: 300; margin-bottom: 0.5rem; }
+  .divider { border: none; border-top: 1px solid #e8e4da; margin: 2rem 0; }
+  .order-details { background: #f4f0e8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; text-align: left; }
+  .order-row { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; }
+  .order-row span:first-child { color: #8a9a84; }
+  .order-row span:last-child { color: #2a3d2e; font-weight: 500; }
+  .btn-primary { display: inline-block; background: #8fbd78; color: #1a2e1c; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .btn-primary:hover { background: #a5d18e; }
+  .btn-outline { display: inline-block; background: transparent; color: #2a3d2e; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-size: 14px; border: 1px solid #d4cfc4; margin-left: 12px; transition: all 0.2s; }
+  .btn-outline:hover { border-color: #8fbd78; color: #2a5c22; }
+  footer { background: #2a3d2e; color: #5a7a5a; text-align: center; padding: 1.5rem; font-size: 13px; }
+  footer span { color: #8fbd78; }
+</style>
+</head>
+<body>
 
-  <script>
-    // Clear the saved cart on successful payment
-    localStorage.removeItem('savedCart');
-  </script>
+<nav>
+  <a href="/" class="logo">Sabrina's <span>Plant Shop</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Shop</a></li>
+    <li><a href="#">Care guides</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<div class="main">
+  <div class="card">
+    <div class="icon-circle">🌿</div>
+    <h1>Order confirmed!</h1>
+    <p>Thank you for your purchase. Your plants are being carefully prepared and will be on their way soon.</p>
+    <p style="font-size:13px; color:#8a9a84; margin-top:8px;">A confirmation email will be sent to you shortly.</p>
+
+    <hr class="divider">
+
+    <div class="order-details">
+      <div class="order-row"><span>Payment status</span><span style="color:#2a5c22;">✓ Paid</span></div>
+      <div class="order-row"><span>Delivery</span><span>3–5 business days</span></div>
+      <div class="order-row"><span>Mode</span><span style="color:#c08030;">🧪 Test order</span></div>
+    </div>
+
+    <a href="/" class="btn-primary">Continue shopping</a>
+    <a href="#" class="btn-outline">View order</a>
+  </div>
+</div>
+
+<footer>
+  © 2025 <span>Sabrina's Plant Shop</span> — Made with 🌱 for plant lovers everywhere.
+</footer>
+
+<script>
+  localStorage.removeItem('savedCart');
+</script>
+
 </body>
 </html>
