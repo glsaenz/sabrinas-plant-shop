@@ -128,7 +128,7 @@ For more test card scenarios visit the [Stripe testing docs](https://stripe.com/
 - PostgreSQL database instead of JSON flat file
 - Admin dashboard to manage products and orders
 - Email confirmation on successful purchase
-- Mobile responsive navigation
+- ~~Mobile responsive navigation~~
 
 ---
 

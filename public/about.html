@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Sabrina's Plant Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #f4f0e8; color: #2c2c2a; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* NAV */
+  nav { background: #2a3d2e; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 22px; color: #d4e8c4; letter-spacing: 0.5px; text-decoration: none; }
+  .logo span { font-style: italic; color: #8fbd78; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #b0c8a0; font-size: 14px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #d4e8c4; }
+  .cart-btn { background: #8fbd78; color: #1a2e1c; border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; transition: background 0.2s; }
+  .cart-btn:hover { background: #a5d18e; }
+  .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; margin-left: 1rem; }
+  .hamburger span { display: block; width: 100%; height: 2px; background: #d4e8c4; border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* HERO */
+  .about-hero { background: linear-gradient(135deg, #2a3d2e 0%, #3d5c3a 60%, #4a7044 100%); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .about-hero::before { content: ''; position: absolute; left: -80px; top: -80px; width: 350px; height: 350px; border-radius: 50%; background: rgba(143,189,120,0.07); }
+  .about-hero::after { content: ''; position: absolute; right: -60px; bottom: -80px; width: 250px; height: 250px; border-radius: 50%; background: rgba(143,189,120,0.06); }
+  .hero-badge { display: inline-block; background: rgba(143,189,120,0.15); color: #a5d18e; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(143,189,120,0.25); margin-bottom: 1.5rem; }
+  .about-hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; color: #e8f4e0; line-height: 1.15; margin-bottom: 1rem; z-index: 1; position: relative; }
+  .about-hero h1 em { font-style: italic; color: #8fbd78; }
+  .about-hero p { color: #8fa87e; font-size: 17px; line-height: 1.7; font-weight: 300; max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* MAIN CONTENT */
+  main { flex: 1; max-width: 900px; margin: 0 auto; padding: 4rem 2rem; width: 100%; }
+
+  /* STORY SECTION */
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; }
+  .story-img { background: #dce8d4; border-radius: 20px; height: 340px; display: flex; align-items: center; justify-content: center; font-size: 100px; }
+  .story-text h2 { font-family: 'Playfair Display', serif; font-size: 30px; color: #2a3d2e; margin-bottom: 1rem; }
+  .story-text p { color: #5a7060; font-size: 15px; line-height: 1.8; font-weight: 300; margin-bottom: 1rem; }
+
+  /* VALUES */
+  .values { margin-bottom: 4rem; }
+  .values h2 { font-family: 'Playfair Display', serif; font-size: 30px; color: #2a3d2e; margin-bottom: 2rem; text-align: center; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .value-card { background: white; border-radius: 16px; border: 1px solid #e8e4da; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s; }
+  .value-card:hover { transform: translateY(-4px); }
+  .value-icon { font-size: 36px; margin-bottom: 1rem; display: block; }
+  .value-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: #2a3d2e; margin-bottom: 0.5rem; }
+  .value-card p { font-size: 14px; color: #5a7060; line-height: 1.6; font-weight: 300; }
+
+  /* STATS */
+  .stats { background: #2a3d2e; border-radius: 20px; padding: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; color: #8fbd78; display: block; }
+  .stat-label { font-size: 13px; color: #5a7a5a; margin-top: 4px; display: block; }
+
+  /* TEAM */
+  .team { margin-bottom: 4rem; }
+  .team h2 { font-family: 'Playfair Display', serif; font-size: 30px; color: #2a3d2e; margin-bottom: 2rem; text-align: center; }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .team-card { background: white; border-radius: 16px; border: 1px solid #e8e4da; padding: 1.75rem 1.5rem; text-align: center; }
+  .team-avatar { width: 72px; height: 72px; border-radius: 50%; background: #dce8d4; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 1rem; }
+  .team-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; color: #2a3d2e; margin-bottom: 4px; }
+  .team-card .role { font-size: 13px; color: #8fbd78; font-weight: 500; margin-bottom: 8px; }
+  .team-card p { font-size: 13px; color: #5a7060; line-height: 1.6; font-weight: 300; }
+
+  /* CTA */
+  .cta { background: white; border-radius: 20px; border: 1px solid #e8e4da; padding: 3rem; text-align: center; }
+  .cta h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #2a3d2e; margin-bottom: 0.75rem; }
+  .cta p { color: #5a7060; font-size: 15px; font-weight: 300; margin-bottom: 1.5rem; }
+  .btn-primary { display: inline-block; background: #8fbd78; color: #1a2e1c; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .btn-primary:hover { background: #a5d18e; }
+  .btn-outline { display: inline-block; background: transparent; color: #2a3d2e; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-size: 14px; border: 1px solid #d4cfc4; margin-left: 12px; transition: all 0.2s; }
+  .btn-outline:hover { border-color: #8fbd78; color: #2a5c22; }
+
+  /* FOOTER */
+  footer { background: #2a3d2e; color: #5a7a5a; text-align: center; padding: 1.5rem; font-size: 13px; }
+  footer span { color: #8fbd78; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #2a3d2e; padding: 1rem 2rem 1.5rem; z-index: 99; border-top: 1px solid rgba(143,189,120,0.15); }
+    .nav-links.open { display: flex; }
+    .story { grid-template-columns: 1fr; }
+    .story-img { height: 220px; font-size: 72px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .team-grid { grid-template-columns: 1fr; }
+    .about-hero h1 { font-size: 32px; }
+    .cta { padding: 2rem 1.5rem; }
+    .btn-outline { margin-left: 0; margin-top: 10px; display: block; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Sabrina's <span>Plant Shop</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/">Shop</a></li>
+    <li><a href="care-guide.html">Care guides</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <a href="/" class="cart-btn">🛒 Shop now</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="about-hero">
+  <div class="hero-badge">🌿 Our story</div>
+  <h1>Grown with <em>love</em>,<br>delivered with care</h1>
+  <p>We believe every home deserves a little greenery. Sabrina's Plant Shop was born from a passion for plants and a desire to make them accessible to everyone.</p>
+</div>
+
+<main>
+
+  <div class="story">
+    <div class="story-img" style="padding:0; overflow:hidden;">
+      <img src="/images/thai-constellation-monstera.jpg" alt="Sabrina's Plant Shop story" 
+          style="width:100%; height:100%; object-fit:cover; border-radius:20px;" />
+    </div>
+    <div class="story-text">
+      <h2>How it all started</h2>
+      <p>It started with a single Monstera on a windowsill. Sabrina had always loved plants but found most plant shops intimidating — full of jargon, overpriced, and not very beginner friendly.</p>
+      <p>So she decided to build something different. A shop where every plant comes with honest care advice, fair prices, and the kind of warmth you'd expect from a friend who happens to have a very green thumb.</p>
+      <p>Today Sabrina's Plant Shop offers over 40 carefully selected varieties across four categories — indoor, flower, tree, and garden — with more added every season.</p>
+    </div>
+  </div>
+
+  <div class="values">
+    <h2>What we stand for</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🌍</span>
+        <h3>Ethically sourced</h3>
+        <p>Every plant is sourced from growers who share our commitment to sustainable and responsible practices.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📦</span>
+        <h3>Packed with care</h3>
+        <p>We use eco-friendly packaging and take extra care to make sure your plants arrive healthy and happy.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">💬</span>
+        <h3>Always here to help</h3>
+        <p>Struggling with a wilting leaf? Our plant care team is always on hand to offer advice and support.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="team">
+    <h2>Meet the team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">🌸</div>
+        <h3>Sabrina</h3>
+        <div class="role">Founder & Head Buyer</div>
+        <p>The plant whisperer behind it all. Sabrina hand-selects every variety in the shop and writes all the care guides.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🌿</div>
+        <h3>Gabriel</h3>
+        <div class="role">Packaging & Logistics</div>
+        <p>Gabriel makes sure every plant is wrapped with love and arrives at your door in perfect condition.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🌻</div>
+        <h3>Olivia and Reese</h3>
+        <div class="role">Customer Care</div>
+        <p>Got a question? This team is your go-to. They know every plant in the shop and love helping customers</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Ready to grow your collection?</h2>
+    <p>Browse our full range of plants and find your perfect match today.</p>
+    <a href="/" class="btn-primary">Shop all plants</a>
+    <a href="#" class="btn-outline">Contact us</a>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 <span>Sabrina's Plant Shop</span> — Made with 🌱 for plant lovers everywhere.
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>

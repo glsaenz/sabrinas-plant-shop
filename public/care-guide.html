@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Guides — Sabrina's Plant Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #f4f0e8; color: #2c2c2a; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* NAV */
+  nav { background: #2a3d2e; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 22px; color: #d4e8c4; letter-spacing: 0.5px; text-decoration: none; }
+  .logo span { font-style: italic; color: #8fbd78; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #b0c8a0; font-size: 14px; text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #d4e8c4; }
+  .cart-btn { background: #8fbd78; color: #1a2e1c; border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; transition: background 0.2s; }
+  .cart-btn:hover { background: #a5d18e; }
+  .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 24px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; margin-left: 1rem; }
+  .hamburger span { display: block; width: 100%; height: 2px; background: #d4e8c4; border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #2a3d2e 0%, #3d5c3a 60%, #4a7044 100%); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; left: -80px; top: -80px; width: 350px; height: 350px; border-radius: 50%; background: rgba(143,189,120,0.07); }
+  .hero::after { content: ''; position: absolute; right: -60px; bottom: -80px; width: 250px; height: 250px; border-radius: 50%; background: rgba(143,189,120,0.06); }
+  .hero-badge { display: inline-block; background: rgba(143,189,120,0.15); color: #a5d18e; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(143,189,120,0.25); margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; color: #e8f4e0; line-height: 1.15; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .hero h1 em { font-style: italic; color: #8fbd78; }
+  .hero p { color: #8fa87e; font-size: 17px; line-height: 1.7; font-weight: 300; max-width: 520px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* QUICK TIPS */
+  .quick-tips { background: #2a3d2e; padding: 2rem 3rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .tip { display: flex; align-items: center; gap: 10px; color: #8fa87e; font-size: 14px; }
+  .tip span:first-child { font-size: 20px; }
+
+  /* MAIN */
+  main { flex: 1; max-width: 960px; margin: 0 auto; padding: 4rem 2rem; width: 100%; }
+
+  /* FILTER TABS */
+  .tab-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .tab-btn { background: white; border: 1px solid #d4cfc4; color: #5a7060; padding: 8px 20px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+  .tab-btn:hover { border-color: #8fbd78; color: #2a3d2e; }
+  .tab-btn.active { background: #2a3d2e; color: #d4e8c4; border-color: #2a3d2e; }
+
+  /* GUIDE CARDS */
+  .guides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .guide-card { background: white; border-radius: 16px; border: 1px solid #e8e4da; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
+  .guide-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(42,61,46,0.1); }
+  .guide-card.hidden { display: none; }
+  .card-header { padding: 1.5rem 1.5rem 1rem; display: flex; align-items: center; gap: 14px; }
+  .card-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .icon-easy { background: #dce8d4; }
+  .icon-medium { background: #faeeda; }
+  .icon-hard { background: #fce8e8; }
+  .card-header-text h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: #2a3d2e; margin-bottom: 3px; }
+  .difficulty { font-size: 12px; font-weight: 500; padding: 2px 10px; border-radius: 8px; display: inline-block; }
+  .diff-easy { background: #dce8d4; color: #2a5c22; }
+  .diff-medium { background: #faeeda; color: #7a5010; }
+  .diff-hard { background: #fce8e8; color: #8a2020; }
+  .card-body { padding: 0 1.5rem 1.5rem; }
+  .card-body p { font-size: 14px; color: #5a7060; line-height: 1.6; font-weight: 300; margin-bottom: 1rem; }
+  .care-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+  .care-stat { background: #f4f0e8; border-radius: 10px; padding: 8px; text-align: center; }
+  .care-stat-icon { font-size: 16px; display: block; margin-bottom: 2px; }
+  .care-stat-label { font-size: 10px; color: #8a9a84; display: block; margin-bottom: 2px; letter-spacing: 0.3px; text-transform: uppercase; }
+  .care-stat-val { font-size: 12px; color: #2a3d2e; font-weight: 500; display: block; }
+  .tips-list { border-top: 1px solid #f0ece4; padding-top: 1rem; }
+  .tips-list h4 { font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: #8a9a84; margin-bottom: 8px; }
+  .tip-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #5a7060; margin-bottom: 5px; line-height: 1.5; }
+  .tip-item::before { content: '✓'; color: #8fbd78; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+
+  /* GENERAL TIPS SECTION */
+  .general-section { margin-top: 4rem; }
+  .general-section h2 { font-family: 'Playfair Display', serif; font-size: 30px; color: #2a3d2e; margin-bottom: 2rem; text-align: center; }
+  .general-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .general-card { background: white; border-radius: 16px; border: 1px solid #e8e4da; padding: 1.5rem; display: flex; gap: 1rem; }
+  .general-icon { font-size: 32px; flex-shrink: 0; }
+  .general-card h3 { font-family: 'Playfair Display', serif; font-size: 17px; color: #2a3d2e; margin-bottom: 6px; }
+  .general-card p { font-size: 14px; color: #5a7060; line-height: 1.6; font-weight: 300; }
+
+  /* CTA */
+  .cta { background: #2a3d2e; border-radius: 20px; padding: 3rem; text-align: center; margin-top: 4rem; }
+  .cta h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #e8f4e0; margin-bottom: 0.75rem; }
+  .cta p { color: #8fa87e; font-size: 15px; font-weight: 300; margin-bottom: 1.5rem; }
+  .btn-primary { display: inline-block; background: #8fbd78; color: #1a2e1c; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .btn-primary:hover { background: #a5d18e; }
+
+  /* FOOTER */
+  footer { background: #2a3d2e; color: #5a7a5a; text-align: center; padding: 1.5rem; font-size: 13px; margin-top: 0; }
+  footer span { color: #8fbd78; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #2a3d2e; padding: 1rem 2rem 1.5rem; z-index: 99; border-top: 1px solid rgba(143,189,120,0.15); }
+    .nav-links.open { display: flex; }
+    .hero h1 { font-size: 32px; }
+    .quick-tips { gap: 1.5rem; padding: 1.5rem; }
+    .guides-grid { grid-template-columns: 1fr; }
+    .general-grid { grid-template-columns: 1fr; }
+    .cta { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Sabrina's <span>Plant Shop</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/">Shop</a></li>
+    <li><a href="care-guide.html" class="active">Care guides</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <a href="/" class="cart-btn">🛒 Shop now</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🌿 Plant care</div>
+  <h1>Keep your plants <em>thriving</em></h1>
+  <p>Simple, honest care advice for every plant in our shop. Whether you're a beginner or a seasoned plant parent, we've got you covered.</p>
+</div>
+
+<div class="quick-tips">
+  <div class="tip"><span>💧</span><span>Water when the top inch of soil is dry</span></div>
+  <div class="tip"><span>☀️</span><span>Most plants love bright indirect light</span></div>
+  <div class="tip"><span>🌡️</span><span>Keep away from cold drafts and radiators</span></div>
+  <div class="tip"><span>🪣</span><span>Always use pots with drainage holes</span></div>
+</div>
+
+<main>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="filterGuides('all', this)">All plants</button>
+    <button class="tab-btn" onclick="filterGuides('indoor', this)">🪴 Indoor</button>
+    <button class="tab-btn" onclick="filterGuides('flower', this)">🌸 Flower</button>
+    <button class="tab-btn" onclick="filterGuides('tree', this)">🌳 Tree</button>
+    <button class="tab-btn" onclick="filterGuides('garden', this)">🌱 Garden</button>
+    <button class="tab-btn" onclick="filterGuides('easy', this)">Easy care</button>
+    <button class="tab-btn" onclick="filterGuides('hard', this)">Advanced</button>
+  </div>
+
+  <div class="guides-grid" id="guides-grid">
+
+    <div class="guide-card" data-category="indoor" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🌿</div>
+        <div class="card-header-text">
+          <h3>Monstera Deliciosa</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>One of the most popular houseplants, the Monstera is forgiving and fast-growing. Perfect for beginners.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Weekly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Indirect</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">18–27°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Water when the top 2 inches of soil are dry</div>
+          <div class="tip-item">Wipe leaves monthly to remove dust</div>
+          <div class="tip-item">Use a moss pole to encourage upward growth</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="indoor" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🍃</div>
+        <div class="card-header-text">
+          <h3>Pothos</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Nearly indestructible, Pothos thrive in almost any condition and look stunning trailing from a shelf.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Every 2 wks</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Low–bright</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">15–30°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Let soil dry out completely between waterings</div>
+          <div class="tip-item">Trim leggy vines to encourage bushier growth</div>
+          <div class="tip-item">Can be propagated easily in a glass of water</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="indoor" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🌵</div>
+        <div class="card-header-text">
+          <h3>Snake Plant</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>One of the hardiest houseplants available. The Snake Plant survives neglect and purifies the air.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Monthly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Any</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">15–29°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Overwatering is the biggest risk — less is more</div>
+          <div class="tip-item">Thrives in low light but grows faster in bright spots</div>
+          <div class="tip-item">Repot every 2–3 years when roots outgrow the pot</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="indoor" data-difficulty="hard">
+      <div class="card-header">
+        <div class="card-icon icon-hard">🌳</div>
+        <div class="card-header-text">
+          <h3>Fiddle Leaf Fig</h3>
+          <span class="difficulty diff-hard">Advanced</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>A showstopper but a diva. The Fiddle Leaf Fig rewards patience and consistency with stunning foliage.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Weekly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Bright</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">16–24°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Never move it once it's settled in a spot</div>
+          <div class="tip-item">Water consistently — same amount each time</div>
+          <div class="tip-item">Mist leaves regularly to boost humidity</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="flower" data-difficulty="medium">
+      <div class="card-header">
+        <div class="card-icon icon-medium">🌹</div>
+        <div class="card-header-text">
+          <h3>Rose</h3>
+          <span class="difficulty diff-medium">Moderate</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Classic and rewarding. Roses need a little more attention but reward you with stunning blooms all season.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">2–3x week</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Full sun</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">15–26°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Water at the base — wet leaves cause disease</div>
+          <div class="tip-item">Deadhead spent blooms to encourage new flowers</div>
+          <div class="tip-item">Feed with rose fertiliser every 4 weeks in summer</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="flower" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">💜</div>
+        <div class="card-header-text">
+          <h3>Lavender</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Fragrant, beautiful, and drought-tolerant. Lavender is a low-maintenance superstar for pots or gardens.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Fortnightly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Full sun</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">10–25°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Plant in well-draining soil — it hates wet roots</div>
+          <div class="tip-item">Trim after flowering to keep it compact</div>
+          <div class="tip-item">Bring indoors during harsh winters</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="flower" data-difficulty="hard">
+      <div class="card-header">
+        <div class="card-icon icon-hard">🌸</div>
+        <div class="card-header-text">
+          <h3>Orchid</h3>
+          <span class="difficulty diff-hard">Advanced</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Exotic and elegant, orchids bloom for months when given the right care. Worth the extra effort.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Weekly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Indirect</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">18–24°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Water by soaking the roots for 10 minutes then draining</div>
+          <div class="tip-item">Never let roots sit in standing water</div>
+          <div class="tip-item">After blooming, cut the spike to encourage re-blooming</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="tree" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🫒</div>
+        <div class="card-header-text">
+          <h3>Olive Tree</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Drought-tolerant and architectural, olive trees are perfect for sunny patios or bright indoor spaces.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Fortnightly</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Full sun</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">7–30°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Needs at least 6 hours of direct sunlight daily</div>
+          <div class="tip-item">Use terracotta pots for good airflow to roots</div>
+          <div class="tip-item">Prune in spring to maintain shape</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="tree" data-difficulty="hard">
+      <div class="card-header">
+        <div class="card-icon icon-hard">🎍</div>
+        <div class="card-header-text">
+          <h3>Bonsai Juniper</h3>
+          <span class="difficulty diff-hard">Advanced</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>A living art form. Bonsai require patience and skill but are one of the most rewarding plants to grow.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Daily check</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Full sun</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">5–25°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Check soil moisture daily — never let it fully dry out</div>
+          <div class="tip-item">Keep outdoors in summer, sheltered in winter</div>
+          <div class="tip-item">Prune and wire in spring to shape the tree</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="garden" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🌿</div>
+        <div class="card-header-text">
+          <h3>Basil</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Fresh, fragrant, and fast-growing. Basil is a kitchen staple that's incredibly easy to grow on a windowsill.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Every 2 days</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Bright</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">18–30°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Pinch off flower buds to keep leaves coming</div>
+          <div class="tip-item">Water at the base — soggy leaves cause rot</div>
+          <div class="tip-item">Harvest from the top to encourage bushier growth</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="garden" data-difficulty="medium">
+      <div class="card-header">
+        <div class="card-icon icon-medium">🍅</div>
+        <div class="card-header-text">
+          <h3>Tomato Plant</h3>
+          <span class="difficulty diff-medium">Moderate</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Nothing beats a homegrown tomato. With the right sun and feeding, you'll have a bumper harvest all summer.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Daily</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Full sun</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">18–27°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Feed with tomato fertiliser every week once flowering</div>
+          <div class="tip-item">Remove side shoots for stronger main stems</div>
+          <div class="tip-item">Support with a stake or cage as they grow</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="garden" data-difficulty="easy">
+      <div class="card-header">
+        <div class="card-icon icon-easy">🍃</div>
+        <div class="card-header-text">
+          <h3>Mint</h3>
+          <span class="difficulty diff-easy">Easy care</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Mint grows so well it can take over a garden bed! Keep it in a pot to control its spread.</p>
+        <div class="care-stats">
+          <div class="care-stat"><span class="care-stat-icon">💧</span><span class="care-stat-label">Water</span><span class="care-stat-val">Every 2 days</span></div>
+          <div class="care-stat"><span class="care-stat-icon">☀️</span><span class="care-stat-label">Light</span><span class="care-stat-val">Part shade</span></div>
+          <div class="care-stat"><span class="care-stat-icon">🌡️</span><span class="care-stat-label">Temp</span><span class="care-stat-val">13–21°C</span></div>
+        </div>
+        <div class="tips-list">
+          <h4>Top tips</h4>
+          <div class="tip-item">Always grow in a pot to prevent it spreading</div>
+          <div class="tip-item">Harvest regularly to keep it compact and bushy</div>
+          <div class="tip-item">Cut back hard in autumn for fresh spring growth</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="general-section">
+    <h2>General plant care tips</h2>
+    <div class="general-grid">
+      <div class="general-card">
+        <div class="general-icon">💧</div>
+        <div>
+          <h3>Watering</h3>
+          <p>Most plants die from overwatering rather than underwatering. Always check the soil before watering — stick your finger an inch into the soil and only water if it feels dry.</p>
+        </div>
+      </div>
+      <div class="general-card">
+        <div class="general-icon">☀️</div>
+        <div>
+          <h3>Light</h3>
+          <p>Bright indirect light suits most houseplants. Direct sun can scorch leaves, while too little light causes leggy, pale growth. A spot a metre from a south-facing window is usually ideal.</p>
+        </div>
+      </div>
+      <div class="general-card">
+        <div class="general-icon">🪣</div>
+        <div>
+          <h3>Drainage</h3>
+          <p>Always use pots with drainage holes. Sitting in waterlogged soil causes root rot, which is one of the most common causes of plant death. Empty saucers after watering.</p>
+        </div>
+      </div>
+      <div class="general-card">
+        <div class="general-icon">🌱</div>
+        <div>
+          <h3>Feeding</h3>
+          <p>Feed your plants with a liquid fertiliser every 2–4 weeks during spring and summer when they're actively growing. Hold off in autumn and winter when growth slows down.</p>
+        </div>
+      </div>
+      <div class="general-card">
+        <div class="general-icon">🌡️</div>
+        <div>
+          <h3>Temperature</h3>
+          <p>Most houseplants prefer stable temperatures between 15–25°C. Keep them away from cold draughts, radiators, and air conditioning units which can cause stress and leaf drop.</p>
+        </div>
+      </div>
+      <div class="general-card">
+        <div class="general-icon">🪴</div>
+        <div>
+          <h3>Repotting</h3>
+          <p>Repot when roots start growing out of drainage holes or the plant dries out very quickly after watering. Spring is the best time to repot into a pot one size larger.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Ready to find your perfect plant?</h2>
+    <p>Browse our full collection and bring a little greenery into your home.</p>
+    <a href="/" class="btn-primary">Shop all plants</a>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 <span>Sabrina's Plant Shop</span> — Made with 🌱 for plant lovers everywhere.
+</footer>
+
+<script>
+  function filterGuides(filter, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.guide-card').forEach(card => {
+      const category = card.dataset.category;
+      const difficulty = card.dataset.difficulty;
+      let show = filter === 'all'
+        || filter === category
+        || (filter === 'easy' && difficulty === 'easy')
+        || (filter === 'hard' && difficulty === 'hard');
+      card.classList.toggle('hidden', !show);
+    });
+  }
+
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
