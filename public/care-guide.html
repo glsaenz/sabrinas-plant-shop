@@ -53,7 +53,7 @@
   .guide-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(42,61,46,0.1); }
   .guide-card.hidden { display: none; }
   .card-header { padding: 1.5rem 1.5rem 1rem; display: flex; align-items: center; gap: 14px; }
-  .card-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .card-icon { width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0; }
   .icon-easy { background: #dce8d4; }
   .icon-medium { background: #faeeda; }
   .icon-hard { background: #fce8e8; }
@@ -153,7 +153,11 @@
 
     <div class="guide-card" data-category="indoor" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🌿</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/1.jpg" alt="Monstera Deliciosa"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌿'" />
+        </div>
         <div class="card-header-text">
           <h3>Monstera Deliciosa</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -177,7 +181,11 @@
 
     <div class="guide-card" data-category="indoor" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🍃</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/2.jpg" alt="Pothos"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌿'" />
+        </div>
         <div class="card-header-text">
           <h3>Pothos</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -201,7 +209,11 @@
 
     <div class="guide-card" data-category="indoor" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🌵</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/3.jpg" alt="Snake Plant"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌿'" />
+        </div>
         <div class="card-header-text">
           <h3>Snake Plant</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -225,7 +237,11 @@
 
     <div class="guide-card" data-category="indoor" data-difficulty="hard">
       <div class="card-header">
-        <div class="card-icon icon-hard">🌳</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/5.jpg" alt="Fiddle Leaf Fig"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌳'" />
+        </div>
         <div class="card-header-text">
           <h3>Fiddle Leaf Fig</h3>
           <span class="difficulty diff-hard">Advanced</span>
@@ -249,7 +265,11 @@
 
     <div class="guide-card" data-category="flower" data-difficulty="medium">
       <div class="card-header">
-        <div class="card-icon icon-medium">🌹</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/11.jpg" alt="Rose"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌹'" />
+        </div>
         <div class="card-header-text">
           <h3>Rose</h3>
           <span class="difficulty diff-medium">Moderate</span>
@@ -273,7 +293,11 @@
 
     <div class="guide-card" data-category="flower" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">💜</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/12.jpg" alt="Lavender"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='💜'" />
+        </div>
         <div class="card-header-text">
           <h3>Lavender</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -297,7 +321,11 @@
 
     <div class="guide-card" data-category="flower" data-difficulty="hard">
       <div class="card-header">
-        <div class="card-icon icon-hard">🌸</div>
+          <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/15.jpg" alt="Orchid"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🌹'" />
+        </div>
         <div class="card-header-text">
           <h3>Orchid</h3>
           <span class="difficulty diff-hard">Advanced</span>
@@ -321,7 +349,11 @@
 
     <div class="guide-card" data-category="tree" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🫒</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/22.jpg" alt="Olive Tree"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🫒'" />
+        </div>
         <div class="card-header-text">
           <h3>Olive Tree</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -345,7 +377,11 @@
 
     <div class="guide-card" data-category="tree" data-difficulty="hard">
       <div class="card-header">
-        <div class="card-icon icon-hard">🎍</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/30.jpg" alt="Bonsai Juniper"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🎍'" />
+        </div>
         <div class="card-header-text">
           <h3>Bonsai Juniper</h3>
           <span class="difficulty diff-hard">Advanced</span>
@@ -369,7 +405,11 @@
 
     <div class="guide-card" data-category="garden" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🌿</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/32.jpg" alt="Basil"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🍃'" />
+        </div>
         <div class="card-header-text">
           <h3>Basil</h3>
           <span class="difficulty diff-easy">Easy care</span>
@@ -393,7 +433,11 @@
 
     <div class="guide-card" data-category="garden" data-difficulty="medium">
       <div class="card-header">
-        <div class="card-icon icon-medium">🍅</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/31.jpg" alt="Tomato Plant"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🍅'" />
+        </div>
         <div class="card-header-text">
           <h3>Tomato Plant</h3>
           <span class="difficulty diff-medium">Moderate</span>
@@ -417,7 +461,11 @@
 
     <div class="guide-card" data-category="garden" data-difficulty="easy">
       <div class="card-header">
-        <div class="card-icon icon-easy">🍃</div>
+        <div class="card-icon" style="padding:0; overflow:hidden;">
+          <img src="/images/33.jpg" alt="Mint"
+              style="width:100%; height:100%; object-fit:cover; border-radius:12px;"
+              onerror="this.parentElement.innerText='🍃'" />
+        </div>
         <div class="card-header-text">
           <h3>Mint</h3>
           <span class="difficulty diff-easy">Easy care</span>

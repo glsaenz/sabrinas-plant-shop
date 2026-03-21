@@ -49,4 +49,45 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
+// Chat endpoint using Anthropic's API
+const Anthropic = require('@anthropic-ai/sdk');
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+app.post('/api/chat', async (req, res) => {
+  const { message, history } = req.body;
+
+  try {
+    const response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1024,
+      system: `You are a friendly plant expert assistant for Sabrina's Plant Shop. 
+      Help customers choose the perfect plant based on their needs, experience level, 
+      and living situation. Be warm, encouraging, and concise.
+      
+      Here is our current product catalogue:
+      ${JSON.stringify(products.map(p => ({
+        id: p.id,
+        name: p.name,
+        category: p.category,
+        care: p.care,
+        price: p.price,
+        tags: p.tags,
+        stock: p.stock
+      })))}
+      
+      When recommending plants always mention the name, price, and care level.
+      Only recommend plants that are in stock. Keep responses under 150 words.`,
+      messages: [
+        ...history,
+        { role: 'user', content: message }
+      ]
+    });
+
+    res.json({ reply: response.content[0].text });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Chat failed' });
+  }
+});
+
 app.listen(3000, () => console.log('Server running at http://localhost:3000'));
