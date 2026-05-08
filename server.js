@@ -27,7 +27,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
         product_data: {
           name: item.name,
           description: item.latin,
-          images: [`http://localhost:3000${item.image}`],
+          images: [`https://plants.gabriel-saenz.org${item.image}`],
         },
         unit_amount: Math.round(item.price * 100), // Stripe uses cents
       },
@@ -38,8 +38,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:3000/success.html',
-      cancel_url: 'http://localhost:3000/cancel.html',
+      success_url: 'https://plants.gabriel-saenz.org/success.html',
+      cancel_url: 'https://plants.gabriel-saenz.org/cancel.html',
     });
 
     res.json({ url: session.url });
